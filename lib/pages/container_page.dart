@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_flutter/widgets/tab_bar.dart';
 
 class ContainerPage extends StatefulWidget {
   const ContainerPage({super.key});
@@ -8,6 +9,15 @@ class ContainerPage extends StatefulWidget {
 }
 
 class _ContainerPageState extends State<ContainerPage> {
+
+  int _currentTabIndex = 0;
+
+  void _selectedTabIndex(int index){
+    setState(() {
+      _currentTabIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,68 +26,16 @@ class _ContainerPageState extends State<ContainerPage> {
 
           // 主内容区域
           IndexedStack(
-
+            children: [
+              Container(
+                color: Colors.red,
+              )
+            ],
           ),
 
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              height: 80,
-              color: Color(0xFF161616),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                      "首页",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  Text(
-                      "商城",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-
-                  Container(
-                    width: 38,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 2
-                      ),
-                      borderRadius: BorderRadius.circular(8)
-                    ),
-                    child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 25
-                    )
-                  ),
-
-                  Text(
-                      "消息",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  Text(
-                      "我",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          // 底部Tab栏
+          BottomTabBar(
+            onTabSelected: (index) => _selectedTabIndex(index),
           )
         ],
       ),
