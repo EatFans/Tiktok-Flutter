@@ -11,12 +11,14 @@ class BottomTabBar extends StatefulWidget {
 
 class _BottomTabBarState extends State<BottomTabBar> {
   // 当前索引
-  int currentIndex = 0;
+  int _currentIndex = 0;
+
+
 
   // 当tab栏被点击
   void _onTabTap(int index) {
     setState(() {
-      currentIndex = index; // 更新内部状态
+      _currentIndex = index; // 更新内部状态
     });
     widget.onTabSelected?.call(index); // 通知父组件
   }
@@ -29,7 +31,7 @@ class _BottomTabBarState extends State<BottomTabBar> {
       bottom: 0,
       child: Container(
         height: 80,
-        color: const Color(0xFF161616),
+        color: _currentIndex == 0 ? Color(0xFF161616) : Colors.white,
         padding: const EdgeInsets.only(bottom: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -39,7 +41,7 @@ class _BottomTabBarState extends State<BottomTabBar> {
               child: Text(
                 "首页",
                 style: TextStyle(
-                  color: currentIndex == 0 ? Colors.red : Colors.white,
+                  color: _currentIndex == 0 ? Colors.white : Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -49,46 +51,50 @@ class _BottomTabBarState extends State<BottomTabBar> {
               child: Text(
                 "商城",
                 style: TextStyle(
-                  color: currentIndex == 1 ? Colors.red : Colors.white,
+                  color: _currentIndex == 1 ? Colors.black : Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+
+            // 中间发布按钮
             GestureDetector(
-              onTap: () => _onTabTap(2),
+              onTap: () => _onTabTap(-1),
               child: Container(
                 width: 38,
                 height: 32,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.white,
-                    width: 2,
+                    color: _currentIndex == 0 ? Colors.white : Colors.black,
+                    width: 3,
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.add,
-                  color: Colors.white,
+                  color: _currentIndex == 0 ? Colors.white : Colors.black,
                   size: 25,
+                ),
+              ),
+            ),
+
+
+            GestureDetector(
+              onTap: () => _onTabTap(2),
+              child: Text(
+                "消息",
+                style: TextStyle(
+                  color: _currentIndex == 2 ? Colors.black : Colors.grey,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             GestureDetector(
               onTap: () => _onTabTap(3),
               child: Text(
-                "消息",
-                style: TextStyle(
-                  color: currentIndex == 3 ? Colors.red : Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () => _onTabTap(4),
-              child: Text(
                 "我",
                 style: TextStyle(
-                  color: currentIndex == 4 ? Colors.red : Colors.white,
+                  color: _currentIndex == 3 ? Colors.black : Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
               ),
