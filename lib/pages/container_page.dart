@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_flutter/pages/home/home.dart';
 import 'package:tiktok_flutter/widgets/tab_bar.dart';
 
 class ContainerPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _ContainerPageState extends State<ContainerPage> {
 
   // 主要页面列表
   final List<Widget> _pageList = [
-    Container(color: Colors.blue, child: Center(child: Text("首页"))),
+    Home(),
     Container(color: Colors.red, child: Center(child: Text("商城"))),
     Container(color: Colors.green, child: Center(child: Text("消息"))),
     Container(color: Colors.yellow, child: Center(child: Text("我"))),
