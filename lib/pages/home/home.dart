@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_flutter/models/video_item_model.dart';
-import 'package:tiktok_flutter/widgets/video_player_widget.dart';
+import 'package:tiktok_flutter/widgets/video/video_player_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
