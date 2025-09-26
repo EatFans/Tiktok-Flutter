@@ -22,7 +22,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   // 视频播放控制器
   late VideoPlayerController _videoPlayerController;
 
-
   bool isLoading = true;
 
   bool isVideoPause = false;
@@ -97,6 +96,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             width: screenSize.width,
             color: Colors.transparent,
             child: Center(
+              // 长款
                 child: videoAspectRatio >= 1 ? HorizontalVideoPlayer(videoPlayerController: _videoPlayerController) : VerticalVideoPlayer(videoPlayerController: _videoPlayerController)
             ),
           ),

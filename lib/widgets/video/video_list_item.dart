@@ -47,7 +47,31 @@ class _VideoListItemState extends State<VideoListItem> {
             color: Colors.black,
             child: VideoPlayerWidget(videoPath: _videoPath),
           )
-        )
+        ),
+
+        // 视频信息部分
+        Positioned(
+          bottom: 80,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: 80,
+            // color: Colors.red,
+            color: Colors.transparent
+          ),
+        ),
+
+        // 视频操作部分
+        Positioned(
+          right: 0,
+          bottom: 80 + 80,
+          child: Container(
+            width: 60,
+            height: 400,
+            // color: Colors.green,
+            color: Colors.transparent
+          ),
+        ),
       ],
     );
   }

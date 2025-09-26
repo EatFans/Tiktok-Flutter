@@ -33,6 +33,7 @@ class _ContainerPageState extends State<ContainerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           // 主内容区域
