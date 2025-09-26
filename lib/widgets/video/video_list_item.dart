@@ -7,14 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:tiktok_flutter/widgets/video/video_player_widget.dart';
+import 'package:video_player/video_player.dart';
 
 class VideoListItem extends StatefulWidget {
 
-  final String videoPath;
+  final VideoPlayerController videoPlayerController;
 
   const VideoListItem({
     super.key,
-    required this.videoPath
+    required this.videoPlayerController
   });
 
   @override
@@ -23,19 +24,18 @@ class VideoListItem extends StatefulWidget {
 
 class _VideoListItemState extends State<VideoListItem> {
 
-  late String _videoPath;
 
   // 初始化
   @override
   void initState() {
     super.initState();
-    _videoPath = widget.videoPath;
   }
 
   @override
   void dispose() {
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,9 @@ class _VideoListItemState extends State<VideoListItem> {
         Positioned.fill(
           child: Container(
             color: Colors.black,
-            child: VideoPlayerWidget(videoPath: _videoPath),
+            child: VideoPlayerWidget(
+              videoPlayerController: widget.videoPlayerController,
+            ),
           )
         ),
 
@@ -57,7 +59,8 @@ class _VideoListItemState extends State<VideoListItem> {
           child: Container(
             height: 80,
             // color: Colors.red,
-            color: Colors.transparent
+            color: Colors.transparent,
+
           ),
         ),
 
@@ -67,9 +70,34 @@ class _VideoListItemState extends State<VideoListItem> {
           bottom: 80 + 80,
           child: Container(
             width: 60,
-            height: 400,
-            // color: Colors.green,
-            color: Colors.transparent
+            height: 340,
+            color: Colors.green,
+            // color: Colors.transparent
+            child: Center(
+              child: Column(
+                children: [
+                  // 头像
+                  SizedBox(
+                    width: 52,
+                    height: 52,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50)
+                      ),
+                    ),
+                  ),
+
+                  // 点赞
+
+                  // 评论
+
+                  // 收藏
+
+                  // 分享
+                ],
+              ),
+            ),
           ),
         ),
       ],

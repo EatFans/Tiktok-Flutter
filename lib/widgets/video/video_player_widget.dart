@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_flutter/widgets/video/horizontal_video_player.dart';
-import 'package:tiktok_flutter/widgets/video/vertical_video_player.dart';
+import 'package:tiktok_flutter/widgets/video/player/horizontal_video_player.dart';
+import 'package:tiktok_flutter/widgets/video/player/vertical_video_player.dart';
 import 'package:video_player/video_player.dart';
 
 // 视频播放器组件
 class VideoPlayerWidget extends StatefulWidget {
 
-  final String videoPath;
+
+  final VideoPlayerController videoPlayerController;
+
 
   const VideoPlayerWidget({
     super.key,
-    required this.videoPath
+    required this.videoPlayerController,
   });
 
   @override
@@ -24,48 +26,17 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   bool isLoading = true;
 
-  bool isVideoPause = false;
+  bool _isShowVideoPauseButton = false;
 
   // 初始化状态
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.asset(widget.videoPath)
-      ..initialize().then((_) {
-        setState(() {
-          isLoading = false;
-        });
-        _playVideo();
-      });
-  }
-
-  // 播放视频
-  void _playVideo(){
-    _videoPlayerController.setVolume(1.0);
-    _videoPlayerController.play();
-    _videoPlayerController.setLooping(true);
-    print("播放视频");
-  }
-
-  // 暂停视频
-  void pauseVideo(){
-    if (_videoPlayerController.value.isPlaying && !isVideoPause){
-      _videoPlayerController.pause();
-
-      setState(() {
-        isVideoPause = true;
-      });
-
-      print("暂停视频");
-    } else {
-      _videoPlayerController.play();
-
-      setState(() {
-        isVideoPause = false;
-      });
-
-      print("继续播放");
-    }
+    _videoPlayerController = widget.videoPlayerController;
+    setState(() {
+      isLoading = false;
+      _isShowVideoPauseButton = false;
+    });
   }
 
   // 处置状态
@@ -73,6 +44,23 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void dispose() {
     _videoPlayerController.dispose();
     super.dispose();
+  }
+
+  // 暂停视频
+  void pauseVideo(){
+    if (_videoPlayerController.value.isPlaying){
+      _videoPlayerController.pause();
+      setState(() {
+        _isShowVideoPauseButton = true;
+      });
+      print("暂停视频");
+    } else {
+      _videoPlayerController.play();
+      setState(() {
+        _isShowVideoPauseButton = false;
+      });
+      print("继续播放");
+    }
   }
 
   @override
@@ -102,8 +90,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           ),
         ),
 
-        // 暂停图标
-        if (isVideoPause)
+        if (_isShowVideoPauseButton)
           Align(
             child: GestureDetector(
               onTap: pauseVideo,
@@ -114,7 +101,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               ),
             ),
           )
-
 
       ]
     );
