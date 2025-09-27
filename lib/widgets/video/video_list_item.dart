@@ -89,7 +89,13 @@ class _VideoListItemState extends State<VideoListItem> {
                   ),
 
                   // 点赞
-
+                  SizedBox(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red
+                      ),
+                    ),
+                  )
                   // 评论
 
                   // 收藏
