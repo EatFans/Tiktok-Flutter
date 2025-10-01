@@ -21,6 +21,11 @@ class _MainVideoPlayContentState extends State<MainVideoPlayContent> {
     VideoPlayerController.asset("assets/video/test2.mp4"),
     VideoPlayerController.asset("assets/video/test3.mp4"),
     VideoPlayerController.asset("assets/video/test4.mp4"),
+    VideoPlayerController.asset("assets/video/test5.mp4"),
+    VideoPlayerController.asset("assets/video/test6.mp4"),
+    VideoPlayerController.asset("assets/video/test7.mp4"),
+    VideoPlayerController.asset("assets/video/test8.mp4"),
+    VideoPlayerController.asset("assets/video/test9.mp4"),
   ];
 
   final List<String> _videoList = [
@@ -32,6 +37,7 @@ class _MainVideoPlayContentState extends State<MainVideoPlayContent> {
     "assets/video/test6.mp4",
     "assets/video/test7.mp4",
     "assets/video/test8.mp4",
+    "assets/video/test9.mp4",
   ];
 
   int _currentVideoPlayerContainerIndex = 0;
