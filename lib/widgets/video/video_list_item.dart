@@ -6,6 +6,7 @@
 // 3、视频操作部分
 
 import 'package:flutter/material.dart';
+import 'package:tiktok_flutter/widgets/home/video_info_avatar.dart';
 import 'package:tiktok_flutter/widgets/video/video_player_widget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -59,7 +60,7 @@ class _VideoListItemState extends State<VideoListItem> {
           child: Container(
             height: 80,
             // color: Colors.red,
-            color: Colors.transparent,
+            // color: Colors.transparent,
 
           ),
         ),
@@ -68,43 +69,7 @@ class _VideoListItemState extends State<VideoListItem> {
         Positioned(
           right: 0,
           bottom: 80 + 80,
-          child: Container(
-            width: 60,
-            height: 340,
-            color: Colors.green,
-            // color: Colors.transparent
-            child: Center(
-              child: Column(
-                children: [
-                  // 头像
-                  SizedBox(
-                    width: 52,
-                    height: 52,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50)
-                      ),
-                    ),
-                  ),
-
-                  // 点赞
-                  SizedBox(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.red
-                      ),
-                    ),
-                  )
-                  // 评论
-
-                  // 收藏
-
-                  // 分享
-                ],
-              ),
-            ),
-          ),
+          child: VideoInfoAvatar()
         ),
       ],
     );
