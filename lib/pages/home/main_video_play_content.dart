@@ -28,6 +28,10 @@ class _MainVideoPlayContentState extends State<MainVideoPlayContent> {
     "assets/video/test2.mp4",
     "assets/video/test3.mp4",
     "assets/video/test4.mp4",
+    "assets/video/test5.mp4",
+    "assets/video/test6.mp4",
+    "assets/video/test7.mp4",
+    "assets/video/test8.mp4",
   ];
 
   int _currentVideoPlayerContainerIndex = 0;
