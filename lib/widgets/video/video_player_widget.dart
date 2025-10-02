@@ -26,7 +26,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   bool isLoading = true;
 
-  bool _isShowVideoPauseButton = false;
 
   // 初始化状态
   @override
@@ -35,32 +34,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     _videoPlayerController = widget.videoPlayerController;
     setState(() {
       isLoading = false;
-      _isShowVideoPauseButton = false;
     });
   }
 
   // 处置状态
   @override
   void dispose() {
-    _videoPlayerController.dispose();
     super.dispose();
-  }
-
-  // 暂停视频
-  void pauseVideo(){
-    if (_videoPlayerController.value.isPlaying){
-      _videoPlayerController.pause();
-      setState(() {
-        _isShowVideoPauseButton = true;
-      });
-      print("暂停视频");
-    } else {
-      _videoPlayerController.play();
-      setState(() {
-        _isShowVideoPauseButton = false;
-      });
-      print("继续播放");
-    }
   }
 
   @override
@@ -75,34 +55,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     // 长宽比
     final videoAspectRatio = videoSize.width / videoSize.height;
 
-    return Stack(
-      children: [
-        // 视频显示区域为底部
-        GestureDetector(
-          onTap: pauseVideo,
-          child: Container(
-            width: screenSize.width,
-            color: Colors.transparent,
-            child: Center(
-              // 长款
-                child: videoAspectRatio >= 1 ? HorizontalVideoPlayer(videoPlayerController: _videoPlayerController) : VerticalVideoPlayer(videoPlayerController: _videoPlayerController)
-            ),
-          ),
-        ),
-
-        if (_isShowVideoPauseButton)
-          Align(
-            child: GestureDetector(
-              onTap: pauseVideo,
-              child: Icon(
-                Icons.play_arrow_rounded,
-                size: 80,
-                color: Colors.white54,
-              ),
-            ),
-          )
-
-      ]
+    return Container(
+      width: screenSize.width,
+      color: Colors.transparent,
+      child: Center(
+        // 长款
+          child: videoAspectRatio >= 1 ? HorizontalVideoPlayer(videoPlayerController: _videoPlayerController) : VerticalVideoPlayer(videoPlayerController: _videoPlayerController)
+      ),
     );
   }
 }

@@ -25,6 +25,7 @@ class VideoListItem extends StatefulWidget {
 
 class _VideoListItemState extends State<VideoListItem> {
 
+  bool _isShowVideoPauseButton = false;
 
   // 初始化
   @override
@@ -37,7 +38,37 @@ class _VideoListItemState extends State<VideoListItem> {
     super.dispose();
   }
 
-  // TODO: 将视频点击相关操作移动到这里进行操作处理
+  // 暂停视频
+  void pauseVideo(){
+    if (widget.videoPlayerController.value.isPlaying){
+      widget.videoPlayerController.pause();
+      setState(() {
+        _isShowVideoPauseButton = true;
+      });
+      print("暂停视频");
+    } else {
+      widget.videoPlayerController.play();
+      setState(() {
+        _isShowVideoPauseButton = false;
+      });
+      print("继续播放");
+    }
+  }
+
+  // 点赞视频
+  void like(){
+    print("双击点赞");
+  }
+
+  // 加速视频播放倍速
+  void accelerateVideoPlay(){
+    print("长摁加速视频播放");
+  }
+
+  // 停止视频加速，恢复正常播放速度
+  void stopAccelerateVideoPlay() {
+    print("停止加速视频播放，恢复正常速度");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +76,18 @@ class _VideoListItemState extends State<VideoListItem> {
       children: [
         // 视频播放器主体
         Positioned.fill(
-          child: Container(
-            color: Colors.black,
-            child: VideoPlayerWidget(
-              videoPlayerController: widget.videoPlayerController,
+          child: GestureDetector(
+            onTap: pauseVideo,
+            onDoubleTap: like,
+            onLongPress: accelerateVideoPlay,
+            onLongPressEnd: (details) {
+              stopAccelerateVideoPlay();
+            },
+            child: Container(
+              color: Colors.black,
+              child: VideoPlayerWidget(
+                videoPlayerController: widget.videoPlayerController,
+              ),
             ),
           )
         ),
@@ -72,6 +111,18 @@ class _VideoListItemState extends State<VideoListItem> {
           bottom: 80 + 80,
           child: VideoInfoAvatar()
         ),
+
+        if (_isShowVideoPauseButton)
+          Align(
+            child:GestureDetector(
+              onTap: pauseVideo,
+              child: Icon(
+                Icons.play_arrow_rounded,
+                size: 80,
+                color: Colors.white54,
+              ),
+            ),
+          )
       ],
     );
   }
