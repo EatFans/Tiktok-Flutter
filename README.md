@@ -11,4 +11,27 @@
 
 <hr />
 
+## 项目介绍
+
+### 依赖
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  # 图标
+  cupertino_icons: ^1.0.8
+  # 视频播放依赖
+  video_player: ^2.10.0
+  # 预加载页面滚动
+  preload_page_view: ^0.2.0
+```
+
+这里使用到video_player来进行多媒体的播放，这个插件依赖会使用到原生的部分，如果iOS运行时候出现问题，需要下载配置 `CocoPods`，
+然后在项目根目录`cd ios`进入ios目录，然后`pod install`安装，如果出现问题，请清除项目缓存，重新install，或者直接删除平台工程，
+重新创建平台工程文件，然后重新进入ios目录，通过`pod install`进行install，CocoPods配置与安装请自行查询。如果还是出现问题，
+请使用XCode打开ios工程，手动配置一下，请自行查询。
+
+这里不使用flutter中的PageView，PageView滑动效果在这里并不好，这里就选用了preload_page_view插件，使用方法与PageView类似。
+
 ## 效果预览
