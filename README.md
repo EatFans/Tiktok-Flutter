@@ -1,6 +1,6 @@
-<div style="display: flex; justify-content: center;">
+<p align="center">
     <img src="doc/title.png" alt="title"/>
-</div>
+</p>
 
 ## 使用Flutter开发一个抖音app
 
