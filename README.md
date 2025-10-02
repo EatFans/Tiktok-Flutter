@@ -34,4 +34,15 @@ dependencies:
 
 这里不使用flutter中的PageView，PageView滑动效果在这里并不好，这里就选用了preload_page_view插件，使用方法与PageView类似。
 
+### 本地资源
+
+本app使用的数据，全部来源于本地，不调用任何API接口，数据来源于本地，不从网络中获取，资源目录为`assets`
+```yaml
+flutter:
+
+  assets:
+    - assets/video/
+    - assets/image/
+```
+
 ## 效果预览
