@@ -99,22 +99,6 @@ class VideoAction extends StatelessWidget {
             ),
 
             const SizedBox(height: 20),
-
-            // 音乐
-            GestureDetector(
-              onTap: () {},
-              child: SizedBox(
-                height: 48,
-                width: 48,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.network(
-                    avatarPath,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),

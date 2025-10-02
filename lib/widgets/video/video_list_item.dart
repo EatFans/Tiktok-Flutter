@@ -6,8 +6,9 @@
 // 3、视频操作部分
 
 import 'package:flutter/material.dart';
-import 'package:tiktok_flutter/widgets/home/video_action.dart';
-import 'package:tiktok_flutter/widgets/home/video_info.dart';
+import 'package:tiktok_flutter/widgets/animation/rotating_widget.dart';
+import 'package:tiktok_flutter/widgets/video/content/video_action.dart';
+import 'package:tiktok_flutter/widgets/video/content/video_info.dart';
 import 'package:tiktok_flutter/widgets/video/video_player_widget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -28,9 +29,14 @@ class _VideoListItemState extends State<VideoListItem> {
 
   bool _isShowVideoPauseButton = false;
 
+  bool _isMusicDiscScrolling = false;
+
   // 初始化
   @override
   void initState() {
+    setState(() {
+      _isMusicDiscScrolling = true;
+    });
     super.initState();
   }
 
@@ -45,12 +51,14 @@ class _VideoListItemState extends State<VideoListItem> {
       widget.videoPlayerController.pause();
       setState(() {
         _isShowVideoPauseButton = true;
+        _isMusicDiscScrolling = false;
       });
       print("暂停视频");
     } else {
       widget.videoPlayerController.play();
       setState(() {
         _isShowVideoPauseButton = false;
+        _isMusicDiscScrolling = true;
       });
       print("继续播放");
     }
@@ -75,6 +83,8 @@ class _VideoListItemState extends State<VideoListItem> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+
+
         // 视频播放器主体
         Positioned.fill(
           child: GestureDetector(
@@ -106,7 +116,7 @@ class _VideoListItemState extends State<VideoListItem> {
         // 视频操作部分
         Positioned(
           right: 0,
-          bottom: 80 + 15,
+          bottom: 80 + 70,
           child: VideoAction(
             avatarPath: "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
             likeCount: 1234,
@@ -114,6 +124,29 @@ class _VideoListItemState extends State<VideoListItem> {
             collectCount: 221,
             shareCount: 43,
           )
+        ),
+
+        // 视频音乐音频部分
+        Positioned(
+          right: 4,
+          bottom: 90,
+          child: SizedBox(
+            height: 45,
+            width: 45,
+            child: RotatingWidget(
+              onTap: () {
+                print("音乐碟被点击");
+              },
+              isPlaying: _isMusicDiscScrolling,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
         ),
 
         if (_isShowVideoPauseButton)
