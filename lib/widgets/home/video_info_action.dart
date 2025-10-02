@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-class VideoInfoAvatar extends StatefulWidget {
-  const VideoInfoAvatar({super.key});
+class VideoInfoAction extends StatefulWidget {
+  const VideoInfoAction({super.key});
 
   @override
-  State<VideoInfoAvatar> createState() => _VideoInfoAvatarState();
+  State<VideoInfoAction> createState() => _VideoInfoActionState();
 }
 
-class _VideoInfoAvatarState extends State<VideoInfoAvatar> {
+class _VideoInfoActionState extends State<VideoInfoAction> {
   @override
   Widget build(BuildContext context) {
     return Container(

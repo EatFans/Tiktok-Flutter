@@ -6,7 +6,7 @@
 // 3、视频操作部分
 
 import 'package:flutter/material.dart';
-import 'package:tiktok_flutter/widgets/home/video_info_avatar.dart';
+import 'package:tiktok_flutter/widgets/home/video_info_action.dart';
 import 'package:tiktok_flutter/widgets/video/video_player_widget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -109,7 +109,7 @@ class _VideoListItemState extends State<VideoListItem> {
         Positioned(
           right: 0,
           bottom: 80 + 80,
-          child: VideoInfoAvatar()
+          child: VideoInfoAction()
         ),
 
         if (_isShowVideoPauseButton)
