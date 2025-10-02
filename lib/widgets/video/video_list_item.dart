@@ -6,9 +6,9 @@
 // 3、视频操作部分
 
 import 'package:flutter/material.dart';
-import 'package:tiktok_flutter/widgets/animation/rotating_widget.dart';
 import 'package:tiktok_flutter/widgets/video/content/video_action.dart';
 import 'package:tiktok_flutter/widgets/video/content/video_info.dart';
+import 'package:tiktok_flutter/widgets/video/content/video_music_disc.dart';
 import 'package:tiktok_flutter/widgets/video/video_player_widget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -83,8 +83,6 @@ class _VideoListItemState extends State<VideoListItem> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
-
         // 视频播放器主体
         Positioned.fill(
           child: GestureDetector(
@@ -130,23 +128,13 @@ class _VideoListItemState extends State<VideoListItem> {
         Positioned(
           right: 4,
           bottom: 90,
-          child: SizedBox(
-            height: 45,
-            width: 45,
-            child: RotatingWidget(
-              onTap: () {
-                print("音乐碟被点击");
-              },
-              isPlaying: _isMusicDiscScrolling,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.network(
-                  "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
+          child: VideoMusicDisc(
+            onTap: () {
+              print("音乐盘被点击");
+            },
+            isMusicDiscScrolling: _isMusicDiscScrolling,
+            musicImagePath: "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
+          )
         ),
 
         if (_isShowVideoPauseButton)
