@@ -2,6 +2,8 @@
     <img src="doc/title.png" alt="title"/>
 </p>
 
+<hr />
+
 ## 使用Flutter开发一个抖音app
 
 - 此项目，90%还原抖音app，所有UI设计按照抖音来实现，但是不同的是部分图标素材
