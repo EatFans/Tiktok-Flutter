@@ -2,17 +2,38 @@
 
 import 'package:flutter/material.dart';
 
-class VideoInfoAction extends StatelessWidget {
+class VideoAction extends StatelessWidget {
 
+  // 头像地址
+  final String avatarPath;
 
-  const VideoInfoAction({
-    super.key
+  // 点赞数量
+  final int likeCount;
+
+  // 评论数量
+  final int commentCount;
+
+  // 收藏数量
+  final int collectCount;
+
+  // 分享数量
+  final int shareCount;
+
+  const VideoAction({
+    super.key,
+    required this.avatarPath,
+    required this.likeCount,
+    required this.commentCount,
+    required this.collectCount,
+    required this.shareCount,
   });
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 60,
+      // color: Colors.red,
       child: Center(
         child: Column(
           children: [
@@ -23,7 +44,7 @@ class VideoInfoAction extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: Image.network(
-                  "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
+                  avatarPath,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -33,10 +54,10 @@ class VideoInfoAction extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: Column(
-                children: const [
+                children: [
                   Icon(Icons.favorite, color: Colors.white, size: 30),
                   SizedBox(height: 2),
-                  Text("1324", style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text(likeCount.toString(), style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -45,10 +66,10 @@ class VideoInfoAction extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: Column(
-                children: const [
+                children: [
                   Icon(Icons.comment, color: Colors.white, size: 28),
                   SizedBox(height: 2),
-                  Text("322", style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text(commentCount.toString(), style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -57,10 +78,10 @@ class VideoInfoAction extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: Column(
-                children: const [
+                children: [
                   Icon(Icons.star, color: Colors.white, size: 30),
                   SizedBox(height: 2),
-                  Text("220", style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text(collectCount.toString(), style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -69,13 +90,31 @@ class VideoInfoAction extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: Column(
-                children: const [
+                children: [
                   Icon(Icons.share, color: Colors.white, size: 28),
                   SizedBox(height: 2),
-                  Text("61", style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text(shareCount.toString(), style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            // 音乐
+            GestureDetector(
+              onTap: () {},
+              child: SizedBox(
+                height: 48,
+                width: 48,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.network(
+                    avatarPath,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

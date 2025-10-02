@@ -6,7 +6,8 @@
 // 3、视频操作部分
 
 import 'package:flutter/material.dart';
-import 'package:tiktok_flutter/widgets/home/video_info_action.dart';
+import 'package:tiktok_flutter/widgets/home/video_action.dart';
+import 'package:tiktok_flutter/widgets/home/video_info.dart';
 import 'package:tiktok_flutter/widgets/video/video_player_widget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -97,19 +98,22 @@ class _VideoListItemState extends State<VideoListItem> {
           bottom: 80,
           left: 0,
           right: 0,
-          child: Container(
-            height: 80,
-            // color: Colors.red,
-            // color: Colors.transparent,
+          child: VideoInfo(
 
-          ),
+          )
         ),
 
         // 视频操作部分
         Positioned(
           right: 0,
-          bottom: 80 + 80,
-          child: VideoInfoAction()
+          bottom: 80 + 15,
+          child: VideoAction(
+            avatarPath: "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
+            likeCount: 1234,
+            commentCount: 234,
+            collectCount: 221,
+            shareCount: 43,
+          )
         ),
 
         if (_isShowVideoPauseButton)
