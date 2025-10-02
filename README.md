@@ -1,7 +1,5 @@
 ## 使用Flutter开发一个抖音app
 
-<hr />
-
 - 此项目，90%还原抖音app，所有UI设计按照抖音来实现，但是不同的是部分图标素材
 - 项目中使用的数据部分为本地数据，数据来源于抖音，所有的视频非恶意盗取，仅供学习，无商业
 - 项目中用到video_player、preload_page_view等插件依赖，很大部分Flutter widget
