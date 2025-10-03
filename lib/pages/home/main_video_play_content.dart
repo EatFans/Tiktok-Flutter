@@ -70,37 +70,16 @@ class _MainVideoPlayContentState extends State<MainVideoPlayContent> {
 
   // 播放指定索引视频，并确保只有该视频在播放
   void _playIndex(int index) {
-    // 暂停当前播放的视频（如果不同）
-    if (_currentVideoPlayerContainerIndex != index) {
-      final prev = _videoPlayerControllerList[_currentVideoPlayerContainerIndex];
-      if (prev.value.isInitialized && prev.value.isPlaying) {
-        prev.pause();
-      }
-    }
-
-    final controller = _videoPlayerControllerList[index];
-    if (controller.value.isInitialized) {
-      controller.setVolume(1.0);
-      controller.setLooping(true);
-      controller.play();
-      _currentVideoPlayerContainerIndex = index;
-      print("开始播放索引: $index");
-      setState(() {});
-    } else {
-      print("索引 $index 控制器尚未初始化，稍后重试播放");
-    }
+    // 播放控制迁移到 VideoListItem，通过 isActive 控制
+    _currentVideoPlayerContainerIndex = index;
+    setState(() {});
+    print("激活索引: $index");
   }
 
   // 页面切换时的处理：暂停旧的，初始化并播放新的
   Future<void> _handlePageChanged(int newIndex) async {
     print("页面切换到: $newIndex");
-    // 暂停旧的
-    final prev = _videoPlayerControllerList[_currentVideoPlayerContainerIndex];
-    if (prev.value.isInitialized && prev.value.isPlaying) {
-      prev.pause();
-    }
-
-    // 初始化并播放新的
+    // 初始化新的
     await _initController(newIndex);
     _playIndex(newIndex);
     // 预初始化相邻页
@@ -142,6 +121,7 @@ class _MainVideoPlayContentState extends State<MainVideoPlayContent> {
         itemBuilder: (context, index) {
           return VideoListItem(
             videoPlayerController: _videoPlayerControllerList[index],
+            isActive: index == _currentVideoPlayerContainerIndex,
             videoItem: VideoItemModel(
                 videoPath: _videoList[index],
                 authorName: "测试",

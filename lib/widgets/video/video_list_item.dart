@@ -19,10 +19,14 @@ class VideoListItem extends StatefulWidget {
 
   final VideoItemModel videoItem;
 
+  // 当前项是否处于激活（可见且应当播放）状态
+  final bool isActive;
+
   const VideoListItem({
     super.key,
     required this.videoPlayerController,
     required this.videoItem,
+    required this.isActive,
   });
 
   @override
@@ -35,35 +39,59 @@ class _VideoListItemState extends State<VideoListItem> {
 
   bool _isMusicDiscScrolling = false;
 
+  late final VoidCallback _controllerListener;
+  // 是否允许自动播放（手动暂停会关闭；重新激活时恢复）
+  bool _allowAutoPlay = true;
+
   // 初始化
   @override
   void initState() {
-    setState(() {
-      _isMusicDiscScrolling = true;
-    });
+    _controllerListener = () {
+      final isPlaying = widget.videoPlayerController.value.isPlaying;
+      final isInitialized = widget.videoPlayerController.value.isInitialized;
+      setState(() {
+        // 暂停时显示播放按钮覆盖，播放时隐藏
+        _isShowVideoPauseButton = !isPlaying;
+        // 只有播放时音乐盘旋转
+        _isMusicDiscScrolling = isPlaying;
+      });
+
+      // 若刚初始化完成且当前项为激活项，且允许自动播放，则自动播放
+      if (isInitialized && widget.isActive && !isPlaying && _allowAutoPlay) {
+        widget.videoPlayerController.setVolume(1.0);
+        widget.videoPlayerController.setLooping(true);
+        widget.videoPlayerController.play();
+      }
+    };
+
+    widget.videoPlayerController.addListener(_controllerListener);
+    // 根据激活状态，决定是否自动播放
+    _applyActiveState();
     super.initState();
   }
 
   @override
   void dispose() {
+    widget.videoPlayerController.removeListener(_controllerListener);
     super.dispose();
   }
 
   // 暂停视频
   void pauseVideo(){
     if (widget.videoPlayerController.value.isPlaying){
+      // 先关闭自动播放，再执行暂停，避免监听器抢先触发自动播放
+      _allowAutoPlay = false;
       widget.videoPlayerController.pause();
-      setState(() {
-        _isShowVideoPauseButton = true;
-        _isMusicDiscScrolling = false;
-      });
       print("暂停视频");
     } else {
+      // 确保基本播放参数
+      if (widget.videoPlayerController.value.isInitialized) {
+        widget.videoPlayerController.setVolume(1.0);
+        widget.videoPlayerController.setLooping(true);
+      }
+      // 先打开自动播放，再执行播放，使监听器中的自动播放逻辑一致
+      _allowAutoPlay = true;
       widget.videoPlayerController.play();
-      setState(() {
-        _isShowVideoPauseButton = false;
-        _isMusicDiscScrolling = true;
-      });
       print("继续播放");
     }
   }
@@ -155,5 +183,37 @@ class _VideoListItemState extends State<VideoListItem> {
           )
       ],
     );
+  }
+
+  // 根据激活状态应用播放/暂停
+  void _applyActiveState() {
+    final c = widget.videoPlayerController;
+    if (!c.value.isInitialized) {
+      // 未初始化时不做处理，待初始化完成后由父组件或手势触发播放
+      return;
+    }
+    if (widget.isActive) {
+      c.setVolume(1.0);
+      c.setLooping(true);
+      if (!c.value.isPlaying) {
+        if (_allowAutoPlay) c.play();
+      }
+    } else {
+      if (c.value.isPlaying) {
+        c.pause();
+      }
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant VideoListItem oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isActive != widget.isActive) {
+      // 重新变为激活项时恢复自动播放策略（满足“切回自动播放”）
+      if (widget.isActive) {
+        _allowAutoPlay = true;
+      }
+      _applyActiveState();
+    }
   }
 }
