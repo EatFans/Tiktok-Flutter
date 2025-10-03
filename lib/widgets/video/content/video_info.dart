@@ -51,16 +51,12 @@ class VideoInfo extends StatelessWidget {
                     fontSize: 13
                   )
                 ),
-
-
               ],
 
             ),
           ),
 
           // 视频进度条
-
-
           const SizedBox(height: 10),
         ],
       ),

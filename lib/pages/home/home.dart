@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_flutter/models/video_item_model.dart';
 import 'package:tiktok_flutter/pages/home/main_video_play_content.dart';
+import 'package:tiktok_flutter/widgets/top_navigation_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,6 +20,10 @@ class _HomeState extends State<Home> {
 
   int _pageContentIndex = 0;
 
+  final List<String> _categories = [
+    "推荐","关注","朋友","同城","团购","长视频","直播","热点","经验"
+  ];
+
   // 视频缓存数据列表
   List<VideoItemModel> tempVideoItemList = [];
 
@@ -35,61 +40,9 @@ class _HomeState extends State<Home> {
               left: 0,
               right: 0,
               top: 0,
-              child: Container(
-                height: 90,
-                color: Colors.transparent,
-                // color: Colors.yellow,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 60),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10,right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        // 抽屉开关按钮
-                        GestureDetector(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start, // 左对齐
-                            children: [
-                              Container(
-                                width: 20,   // 最长
-                                height: 2,
-                                color: Colors.white,
-                                margin: EdgeInsets.only(bottom: 3),
-                              ),
-                              Container(
-                                width: 15,   // 中等
-                                height: 2,
-                                color: Colors.white,
-                                margin: EdgeInsets.only(bottom: 3),
-                              ),
-                              Container(
-                                width: 8,   // 最短
-                                height: 2,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        // 视频分类区域
-                        Expanded(child: Container()),
-
-                        // 搜索按钮
-                        GestureDetector(
-                          child: Icon(
-                              Icons.search,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              size: 28
-                          ),
-                        )
-
-                      ],
-                    ),
-                  ),
-                ),
+              child: TopNavigationBar(
+                selectedIndex: _pageContentIndex,
+                categories: _categories,
               ),
             ),
           ],

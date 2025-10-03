@@ -12,10 +12,16 @@ class VideoItemModel {
 
   final int commentCount;
 
+  final int collectCount;
+
+  final int shareCount;
+
   VideoItemModel({
     required this.videoPlayerController,
     required this.avatarPath,
     required this.likeCount,
     required this.commentCount,
+    required this.collectCount,
+    required this.shareCount,
   });
 }
