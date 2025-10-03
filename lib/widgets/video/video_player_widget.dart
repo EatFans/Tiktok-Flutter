@@ -37,7 +37,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
+    if (isLoading || !_videoPlayerController.value.isInitialized) {
       return Center(child: CircularProgressIndicator());
     }
     // 视频原始尺寸

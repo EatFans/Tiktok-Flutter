@@ -6,6 +6,7 @@
 // 3、视频操作部分
 
 import 'package:flutter/material.dart';
+import 'package:tiktok_flutter/models/video_item_model.dart';
 import 'package:tiktok_flutter/widgets/video/content/video_action.dart';
 import 'package:tiktok_flutter/widgets/video/content/video_info.dart';
 import 'package:tiktok_flutter/widgets/video/content/video_music_disc.dart';
@@ -16,9 +17,12 @@ class VideoListItem extends StatefulWidget {
 
   final VideoPlayerController videoPlayerController;
 
+  final VideoItemModel videoItem;
+
   const VideoListItem({
     super.key,
-    required this.videoPlayerController
+    required this.videoPlayerController,
+    required this.videoItem,
   });
 
   @override
@@ -107,8 +111,8 @@ class _VideoListItemState extends State<VideoListItem> {
           left: 0,
           right: 0,
           child: VideoInfo(
-            authorName: "测试",
-            videoTitle: "这是一条测试视频信息标题文案",
+            authorName: widget.videoItem.authorName,
+            videoTitle: widget.videoItem.videoTitle,
           )
         ),
 
@@ -117,11 +121,11 @@ class _VideoListItemState extends State<VideoListItem> {
           right: 0,
           bottom: 80 + 70,
           child: VideoAction(
-            avatarPath: "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
-            likeCount: 1234,
-            commentCount: 234,
-            collectCount: 221,
-            shareCount: 43,
+            avatarPath: widget.videoItem.avatarPath,
+            likeCount: widget.videoItem.likeCount,
+            commentCount: widget.videoItem.commentCount,
+            collectCount: widget.videoItem.collectCount,
+            shareCount: widget.videoItem.shareCount,
           )
         ),
 
@@ -134,7 +138,7 @@ class _VideoListItemState extends State<VideoListItem> {
               print("音乐盘被点击");
             },
             isMusicDiscScrolling: _isMusicDiscScrolling,
-            musicImagePath: "https://picx.zhimg.com/50/v2-6afa72220d29f045c15217aa6b275808_720w.jpg",
+            musicImagePath: widget.videoItem.musicCover,
           )
         ),
 

@@ -38,8 +38,9 @@ dependencies:
   # 视频播放依赖
   video_player: ^2.10.0
 
-  # 预加载页面滚动
+  # 预加载翻页视图（支持提前构建邻居页面）
   preload_page_view: ^0.2.0
+
 
 dev_dependencies:
   flutter_test:
