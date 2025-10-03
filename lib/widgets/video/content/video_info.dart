@@ -3,7 +3,16 @@
 import 'package:flutter/material.dart';
 
 class VideoInfo extends StatelessWidget {
-  const VideoInfo({super.key});
+
+  final String authorName;
+
+  final String videoTitle;
+
+  const VideoInfo({
+    super.key,
+    required this.authorName,
+    required this.videoTitle
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +27,7 @@ class VideoInfo extends StatelessWidget {
             children: [
               const SizedBox(width: 5),
               Text(
-                "测试",
+                authorName,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -35,7 +44,7 @@ class VideoInfo extends StatelessWidget {
               children: [
                 const SizedBox(width: 5),
                 Text(
-                  "这是一个测试视频信息标题文案",
+                  videoTitle,
                   style: TextStyle(
                     color: Color(0xFFDAD9D9),
                     fontWeight: FontWeight.bold,

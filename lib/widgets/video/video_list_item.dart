@@ -107,7 +107,8 @@ class _VideoListItemState extends State<VideoListItem> {
           left: 0,
           right: 0,
           child: VideoInfo(
-
+            authorName: "测试",
+            videoTitle: "这是一条测试视频信息标题文案",
           )
         ),
 

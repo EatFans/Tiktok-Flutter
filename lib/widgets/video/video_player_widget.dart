@@ -6,9 +6,7 @@ import 'package:video_player/video_player.dart';
 // 视频播放器组件
 class VideoPlayerWidget extends StatefulWidget {
 
-
   final VideoPlayerController videoPlayerController;
-
 
   const VideoPlayerWidget({
     super.key,
